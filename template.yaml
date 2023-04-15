@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM with DynamoDB
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'*'"
+      AllowOrigin: "'*'"
+      AllowCredentials: "'*'"
+
+Resources:
+  Login:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/
+      Handler: app.login
+      Runtime: nodejs14.x
+      Architectures:
+        - x86_64
+      Events:
+        Login:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: post
+      Environment:
+        Variables:
+          SECRET:  !Ref SECRET
+
+  User:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/
+      Handler: app.user
+      Runtime: nodejs14.x
+      Architectures:
+        - x86_64
+      Events:
+        createUser:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: post
+        getUser:
+          Type: Api
+          Properties:
+            Path: /user/{id}
+            Method: get
+        updateUser:
+          Type: Api
+          Properties:
+            Path: /user/{id}
+            Method: put
+        deleteUser:
+          Type: Api
+          Properties:
+            Path: /user/{id}
+            Method: delete
+
+  Client:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.client
+      Runtime: nodejs14.x
+      Architectures:
+        - x86_64
+      Events:
+        createClient:
+          Type: Api
+          Properties:
+            Path: /client
+            Method: post
+

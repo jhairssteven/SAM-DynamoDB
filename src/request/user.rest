@@ -1,0 +1,32 @@
+### Servicio para crear usuario
+
+POST http://localhost:3000/user
+content-type: application/json
+
+{
+  "name": "Camilo",
+  "email": "camilao@mail.com",
+  "password": "passwords"
+}
+
+
+### Servicio para obtener un usuario
+
+GET http://localhost:3000/user/30
+content-type: application/json
+
+
+### Servicio para actualizar un usuario
+PUT  http://localhost:3000/user/30
+content-type: application/json
+
+{
+  "name": "Camilo",
+  "email": "camilo@mail.com",
+  "password": "contraseña"
+}
+
+
+### Servicio para eliminar un usuario
+DELETE   http://localhost:3000/user/30
+content-type: application/json

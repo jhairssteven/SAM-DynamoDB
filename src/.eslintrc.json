@@ -1,0 +1,33 @@
+{
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["google"],
+  
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    }
+  },
+  "overrides": [
+    {
+      "files": ["utils/*"],
+      "excludedFiles": "database"
+    }
+  ],
+  "rules": {
+    "max-len": ["error", {"code":100}],
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "never"],
+    "guard-for-in": [0],
+    "one-var": ["error", "never"],
+    "require-jsdoc": [0],
+    "valid-jsdoc": [0],
+    "object-curly-spacing": [0],
+    "linebreak-style": [0]
+  }
+}

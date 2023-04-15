@@ -1,0 +1,16 @@
+{
+  "check-coverage": true,
+  "include": [
+    "**/*.js"
+  ],
+  "exclude": [
+    "tests/*.js",
+    "database/",
+    "repository/",
+    "service/"
+  ],
+  "branches": 80,
+  "lines": 85,
+  "functions": 85,
+  "statements": 85
+}

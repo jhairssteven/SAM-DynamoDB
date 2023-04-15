@@ -1,0 +1,9 @@
+### Servicio para iniciar sesión
+
+POST http://localhost:3000/login
+content-type: application/json
+
+{
+  "email": "camilao@mail.com",
+  "password": "passwords"
+}

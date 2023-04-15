@@ -1,0 +1,11 @@
+### Servicio para crear cliente
+
+POST http://localhost:3000/client
+content-type: application/json
+
+{ 
+  "ID": "1022334768",
+  "name": "Camilo",
+  "email": "camilao@mail.com",
+  "company": "TheCompany name"
+}
