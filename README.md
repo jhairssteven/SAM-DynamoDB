@@ -1,66 +1,67 @@
-# Serverless Application Model (SAM) con DynamoDB y Docker
+# Serverless Application Model (SAM) with DynamoDB and Docker
 
 
-Este proyecto contiene código fuente y archivos de soporte para una aplicación que se implementa con SAM CLI y Docker. Incluye los siguientes archivos y carpetas.
+This project contains source code and supporting files for a basic REST API that is deployed with SAM CLI and Docker. It includes the following files and folders.
 
 |||
 |-|-|
-| [src/controller](./src/controller/)  | Contiene los controladores de la aplicación.                                                            |
-| [src/database](./src/database)       | Contiene los modelos y configuraciones de la base de datos.                                             |
-| [src/repository](./src/repository)   | Contiene las operaciones del ORM de los modelos.                                                        |
-| [src/request](./src/request)         | Contiene ejemplos de los request de la aplicación.                                                      |
-| [src/service](./src/service)         | Contiene servicios externos que se requieren para el funcionamiento de las funcionalidades principales. |
-| [src/test](./src/test)               | Contiene los mockups y pruebas funcionales para la realización de pruebas funcionales.                  |
-| [template.yaml](./template.yaml)     | Define los recursos de AWS de la aplicación.                                                            |
+| [src/controller](./src/controller/)  | Contains the application controllers.                                                            |
+| [src/database](./src/database)       | Contains the database models and configurations.                                             |
+| [src/repository](./src/repository)   | Contains the ORM operations of the models.                                                        |
+| [src/request](./src/request)         | Contains examples of the application's requests.                                                      |
+| [src/service](./src/service)         | Contains external services required for the operation of the main functionalities. |
+| [src/test](./src/test)               | Contains mockups and unit tests for functional testing.                  |
+| [template.yaml](./template.yaml)     | Defines the AWS resources of the application.                                                            |
 
 
 
 
 
-## Prerequisitos
+## Prerequisites
 
 * SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 
-* Node.js y npm - [Install Node.js ](https://nodejs.org/en/)
+* Node.js and npm - [Install Node.js ](https://nodejs.org/en/)
 
-* Docker y Docker compose - [Install Docker](https://docs.docker.com/compose/install/)
+* Docker and Docker compose - [Install Docker](https://docs.docker.com/compose/install/)
 
-## Configuración
-En la carpeta `src`, cree un archivo `.env` con las siguientes variables de entorno. **Asegurese de asignarle los valores correspondientes**.
+## Configuration
+In the `src` folder, create a `.env` file with the following environment variables. **Be sure to assign the corresponding values**.
 
 ```javascript
 NODE_ENV='' #development, test
 SECRET='' #jwtsupersecret
 ```
 
-Installe las dependencias con
+Install dependencies with
 ```shell
 src$ npm i
 ```
 
-## Correr la aplicación
-1. Actualize `NODE_ENV='development'`en el archivo `.env`
-2. Corra el contenedor con DynamoDB en *detached mode*
+## Running the application
+
+1. Update NODE_ENV='development'in the .env file
+2. Run the DynamoDB container in detached mode
     ```shell
     src/database$ docker compose up -d
     ```
-3.  Corra la aplicación con
+3.  Run the application with
 
     ```shell
     SAM-DynamoDB$ sam local start-api --docker-network dynamodb_network
     ```
-4. Puede enviar peticiones utilizando el formato de cada *enpoint* en la carpeta [request](./src/request/).
+4. You can send requests using the format of each endpoint in the [request](./src/request/) folder.
 
-    > Nota: Para detener el contenedor de DynamoDB
+    > Note: To stop the DynamoDB container
     ```shell
     src/database$ docker compose down -v
     ```
-## Pruebas unitarias
-1. Corra el contenedor con DynamoDB en *detached mode*
+## Unit testing
+1. Run the DynamoDB container in detached mode
     ```shell
     src/database$ docker compose up -d
     ```
-2. Para correr las pruebas unitarias y los mockups actualize `NODE_ENV='test'`en el archivo `.env` y ejecute el comando
+2. To run unit tests and mockups, update `NODE_ENV='test'` in the `.env` file and execute the command
 
     ```shell
     src$ npm run test
